@@ -2,39 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissor</title>
 </head>
 <body>
-    <script>
-
-        let choices = ["Rock", "Paper", "Scissor"]
-
-        function computerPlay() {
-            compChoice = choices[Math.floor(Math.random() * choices.length)];
-            return compChoice;
-        }
-
-        function playRound(playerSelection, computerSelection) {
-            if (computerSelection === "Rock" && playerSelection === "scissor") {
-                return "You lose! Rock beats Scissor!"
-            } else if (computerSelection === "Rock" && playerSelection === "paper") {
-                return "You win! Paper beats Rock."
-            } else if (computerSelection === "Paper" && playerSelection === "rock") {
-                return "You lose! Paper beats Rock."
-            } else if (computerSelection === "Paper" && playerSelection === "scissor") {
-                return "You win! Scissor beats Paper."
-            } else if (computerSelection === "Scissor" && playerSelection === "rock") {
-                return "You win! Scissor beats Paper."
-            } else if (computerSelection === "Scissor" && playerSelection === "paper") {
-                return "You lose! Scissor beats Paper."
-            } else {
-                return "It's a draw!"
-            }
-        }
-    const playerSelection = prompt("Rock, Paper, Scissor!", '');
-    const computerSelection = computerPlay(); 
-    alert(playRound(playerSelection, computerSelection));
-    </script>
+    <h1>
+       Rock Paper Scissor! 
+    </h1>
+    <div class = score>
+        <h1 class = announcement></h1>
+        <h2>Scoreboard</h2>
+        <h3 class = computerscore></h3>
+        <h3 class = playerscore></h3>
+        <h4 class = scoretext></h4>
+    </div>
+        <button class = "playAgain">Play Again!</button>
+        <div>
+        <button class = "rockBtn">Rock</button>
+        <button class = "paperBtn">Paper</button>
+        <button class = "scissorBtn">Scissor</button>
+        </div>
+    <script src="script.js"></script>
 </body>
 </html>
