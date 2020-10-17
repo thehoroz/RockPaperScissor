@@ -1,62 +1,58 @@
 let playerName = prompt("What is your name Chap?")
-if(playerName == "Atski") {
-    playerName = "Sarisin Bomba"}
-    else if (playerName == "Musta") {
-    playerName = "EEEYBIROER"
-    } else if(playerName == "Bilal"){
-        playerName = "Udyrmainlenmq"
-    } else if(playerName == "Tugay") {
-        playerName = "Kanka3aysonrahayvangibiyim"
-    } else if(playerName == "Muhammed") {
-        playerName = "JavascriptMainHosgeldin"
-    } else if(playerName == "Yusuf") {
-        playerName = "Sucuk"
-    }
-let playerSelection;
-let playerPoints = 0;
-let computerPoints = 0;
-
-
-const announcement = document.querySelector('.announcement')
-const playerScore = document.querySelector('.playerscore')
-const computerScore = document.querySelector('.computerscore')
-const scoreTeller = document.querySelector('.scoretext')
 
 const playAgainBtn = document.querySelector('.playAgain')
+let playerPoints = 0;
+let computerPoints = 0;
+const playerScore = document.querySelector('.playerscore')
+const computerScore = document.querySelector('.computerscore')
+const announcement = document.querySelector('.announcement')
+const rock = document.getElementById('rockBtn')
+const paper = document.getElementById('paperBtn')
+const scissor = document.getElementById('scissorBtn')
+
+let playerSelection;
+
+const scoreTeller = document.querySelector('.scoretext')
+
+
+// button to let the user restart the game
 playAgainBtn.addEventListener('click', function(){
     playerPoints = 0;
     computerPoints = 0;
     playerScore.textContent = playerName + ": " + playerPoints;
     computerScore.textContent = "PC Masterrace: " + computerPoints;
     announcement.textContent = "Score 5 points to Win!"
+    rock.className = 'btns'
+    paper.className = 'btns'
+    scissor.className = 'btns'
 })
 
-const rock = document.querySelector('.rockBtn')
-rock.addEventListener('click', () => {
-    playerSelection = "Rock"
-    playRound();
-})
-
-const paper = document.querySelector('.paperBtn')
-paper.addEventListener('click', () => {
-    playerSelection = "Paper"
-    playRound();
-})
-
-const scissor = document.querySelector('.scissorBtn')
-scissor.addEventListener('click', () => {
-    playerSelection = "Scissor"
-    playRound();
-}) 
+    rock.addEventListener('click', () => {
+        playerSelection = "Rock"
+        if (!isMaxScoreReached()) {
+            playRound();
+        } 
+    })
+    paper.addEventListener('click', () => {
+        playerSelection = "Paper"
+        if (!isMaxScoreReached()) {
+            playRound();
+        }
+    })
+    scissor.addEventListener('click', () => {
+        playerSelection = "Scissor"
+        if (!isMaxScoreReached()) {
+            playRound();
+        }
+    }) 
 
 function playRound() {
 
-    function computerPlay(){
     let choices = ["Rock", "Paper", "Scissor"]
-    let computerChoice = choices[Math.floor(Math.random()*choices.length)];
-    return computerChoice;
-    }
-    let computerSelection = computerPlay();
+    let computerSelection = choices[Math.floor(Math.random()*choices.length)];
+    
+    console.log("Computer" + computerSelection);
+    console.log("User" + playerSelection);
 
     if(playerSelection == "Rock" && computerSelection == "Paper") {
         computerPoints++;
@@ -83,12 +79,26 @@ function playRound() {
     playerScore.textContent = playerName + ": " + playerPoints;
     computerScore.textContent = "PC Masterrace: " + computerPoints;
 
-    let endGame = function() {
-        if(playerPoints == 5) {
-            announcement.textContent = playerName + " Wins!!"
-        } else if(computerPoints == 5) {
-            announcement.textContent = "PC Masterrace Wins!"
-        }
+    if(playerPoints == 5) {
+        announcement.textContent = playerName + " Wins!!"
+        disableTheButtons()
+    } else if(computerPoints == 5) {
+        announcement.textContent = "PC Masterrace Wins!"
+        disableTheButtons()
     }
-    endGame()
+}
+
+function disableTheButtons() {
+    announcement.textContent = "Restart the game"
+    rock.className = 'disabledBtns'
+    paper.className = 'disabledBtns'
+    scissor.className = 'disabledBtns'
+}
+
+function isMaxScoreReached() {
+    // disable button, score limit reached
+    if (playerPoints === 5 || computerPoints === 5) {
+        return true
+    } 
+    return false
 }
